@@ -12,7 +12,7 @@ class Controller:
         self.player_repository = PlayerRepository()
         self.card_repository = CardRepository()
 
-    def add_player(self, player_type: str, username):
+    def add_player(self, player_type: str, username: str):
         player = Advanced(username) if player_type == 'Advance' else Beginner(username)
         self.player_repository.add(player)
         return f'Successfully add player of type{player_type} with username {username}'

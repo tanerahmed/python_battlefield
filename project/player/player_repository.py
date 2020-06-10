@@ -20,17 +20,14 @@ class PlayerRepository:
     def remove(self, player_name: str):
         if player_name == '':
             raise ValueError('Player cannot be empty string')
+
         found_player = self.find(player_name)
         self.players.remove(found_player)
 
     def find(self, username):
-        found_player = [player for player in self.players if player.username == username][0]
+        try:
+            found_player = [player for player in self.players if player.username == username][0]
+        except IndexError:
+            raise IndexError('No player found!')
+
         return found_player
-
-
-player_taner = Advanced('taner')
-player_rafaydin = Advanced('rafaydin')
-player_ahmed = Advanced('ahmed')
-
-
-# [print(p.username) for p in pr.players]

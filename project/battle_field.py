@@ -4,9 +4,12 @@ from project.player.player import Player
 class BattleField:
 
     def fight(self, attacker: Player, enemy: Player):
+
+        # If some of player is dead, no need to play at all
         if attacker.is_dead or enemy.is_dead:
             raise ValueError("Player is dead")
 
+        # Attacker or Enemy is Beginner get some bonus
         if attacker.__class__.__name__ == "Beginner":
             self.__bonus_increase_player_health(attacker)
             self.__bonus_increase_player_cards_damage_points(attacker)
@@ -15,6 +18,7 @@ class BattleField:
             self.__bonus_increase_player_health(enemy)
             self.__bonus_increase_player_cards_damage_points(enemy)
 
+        # Regular bonus for both player
         self.__bonus_for_player(attacker)
         self.__bonus_for_player(enemy)
 
@@ -37,6 +41,4 @@ class BattleField:
     def __hit(self, fighter, victim):
         for card in fighter.card_repository.cards:
             victim.take_damage(card.damage_points)
-
-
-
+            
